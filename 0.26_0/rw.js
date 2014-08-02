@@ -30,8 +30,8 @@ var entroMouse = window.entroMouse = {
             time = new Date().getTime();
 
             var num = (Math.pow(X,3)
-                          + Math.pow(Y,3) 
-                          + Math.floor(time*1000) 
+                          + Math.pow(Y,3)
+                          + Math.floor(time*1000)
                           + Math.floor(Math.random() * 1000)) % 62;
 
             if (time % 4 == 1)
@@ -555,7 +555,7 @@ rush = window.rush = {
             setMsg("You are trying to send more BTC than you have in your balance!");
             return false;
         }
-        
+
         if (parseFloat($("#txtAmount").val()) + this.txFee > this.balance)
         {
             setMsg("You need to leave enough room for the " + this.txFee + " btc miner fee");
@@ -642,6 +642,54 @@ rush = window.rush = {
 
     },
 
+    "sendToAmount": function (address, amount)
+    {
+        if (!this.check())
+        {
+            return;
+        }
+
+        if (this.encrypted)
+        {
+
+            if ($("#password").val() == "")
+            {
+                setMsg("Your wallet is encrypted. Please enter a password.");
+            }
+
+            var passcode = CryptoJS.AES.decrypt(this.passcode, $("#password").val());
+
+            var passcode = passcode.toString(CryptoJS.enc.Utf8);
+
+            if (!passcode)
+            {
+                setMsg("Wrong Password!");
+                return;
+            }
+
+        }
+        else
+        {
+            var passcode = this.passcode;
+        }
+
+        var bytes = Bitcoin.Crypto.SHA256(passcode,
+        {
+            asBytes: true
+        });
+
+        var btcKey = new Bitcoin.Key(bytes);
+
+        this.txSec = btcKey.export("base58");
+        this.txAmount = parseFloat(amount);
+        this.txAmount = this.txAmount.toFixed(8);
+        this.txDest = address;
+        txGetUnspent();
+
+        $("#send").attr("disabled", "disabled");
+        $("#send").html("Sending...");
+
+    },
 
     "getBalance": function ()
     {
@@ -875,7 +923,7 @@ rush = window.rush = {
             case 4:
                 rush.loadRedditNews( function () {rush.loadNews();} );
                 break;
-        }        
+        }
 
         $("#newsTitle").html( this.newsOptions[this.newsType - 1] );
 
@@ -895,7 +943,7 @@ rush = window.rush = {
             dataType: "xml",
             data:
             {
-                
+
             },
 
             type: "GET",
@@ -923,7 +971,7 @@ rush = window.rush = {
                 {
                     callbk();
                 }
-                
+
 
             },
             error: function (xhr, opt, err)
@@ -942,7 +990,7 @@ rush = window.rush = {
             dataType: "json",
             data:
             {
-                
+
             },
 
             type: "GET",
@@ -1328,16 +1376,16 @@ rush = window.rush = {
     },
     "decryptBIP38": function ()
     {
-        Bitcoin.BIP38.EncryptedKeyToByteArrayAsync("6PfM14UF3DDa5e7TnzxyQg7iYr2VsvhyxU9LMTsTxaQiWo7ejkJscp1V3v", "poop", 
-            function(privateKeyByteArray, isCompPoint) 
+        Bitcoin.BIP38.EncryptedKeyToByteArrayAsync("6PfM14UF3DDa5e7TnzxyQg7iYr2VsvhyxU9LMTsTxaQiWo7ejkJscp1V3v", "poop",
+            function(privateKeyByteArray, isCompPoint)
             {
                 if (privateKeyByteArray != null && privateKeyByteArray.length > 0) {
                     var btc = new Bitcoin.ECKey(privateKeyByteArray);
                     console.log(isCompPoint ? btc.getBitcoinWalletImportFormatCompressed() : btc.getBitcoinWalletImportFormat());
-                    console.log(isCompPoint ? btc.getBitcoinAddressCompressed() : btc.getBitcoinAddress()); 
+                    console.log(isCompPoint ? btc.getBitcoinAddressCompressed() : btc.getBitcoinAddress());
                 } else {
-                    setMsg('Invalid encrypted key or passphrase');    
-                } 
+                    setMsg('Invalid encrypted key or passphrase');
+                }
             } );
     },
     "gpgSendEncrypted": function ()
@@ -1813,13 +1861,13 @@ rush = window.rush = {
 
         //var msgID = $('#messageList').val();
 
-        // this.gpgMessages[msgID].read = true;  
+        // this.gpgMessages[msgID].read = true;
 
         // chrome.storage.local.set({
         //     'gpgMessages'       : rush.gpgMessages
         // }, function () {
 
-        // });      
+        // });
 
         var verifyString = "";
 
@@ -2077,7 +2125,7 @@ rush = window.rush = {
             'currency': currency
         }, function () {
 
-            rush.getFiatPrice();    
+            rush.getFiatPrice();
 
         });
 
@@ -2107,7 +2155,7 @@ rush = window.rush = {
 
         for ( i in this.donateOptions )
         {
-            $("#donateOptions").append('<a href="#" class="donateLink" donateID="' + i + '">' + this.donateOptions[i][0] + '</a></a>');   
+            $("#donateOptions").append('<a href="#" class="donateLink" donateID="' + i + '">' + this.donateOptions[i][0] + '</a></a>');
         }
 
     },
@@ -2119,10 +2167,10 @@ rush = window.rush = {
 
         for ( i in amounts )
         {
-            $("#donateAmounts").append('<a href="#" class="donateNow" addr="' + this.donateOptions[donateID][1] + '" amount="' + amounts[i] + '">Donate ' + rush.getFiatPrefix() + amounts[i] + '</a>');   
+            $("#donateAmounts").append('<a href="#" class="donateNow" addr="' + this.donateOptions[donateID][1] + '" amount="' + amounts[i] + '">Donate ' + rush.getFiatPrefix() + amounts[i] + '</a>');
         }
 
-        $("#donateAmounts").append('<a href="#" class="donateNow" addr="' + this.donateOptions[donateID][1] + '" amount="0">Custom Donation</a>');   
+        $("#donateAmounts").append('<a href="#" class="donateNow" addr="' + this.donateOptions[donateID][1] + '" amount="0">Custom Donation</a>');
 
     },
     "donate": function ( donateBtn )
@@ -2148,13 +2196,13 @@ rush = window.rush = {
         this.get24Chart();
         this.get30Chart();
     },
-    "get24Chart": function() 
+    "get24Chart": function()
     {
         $.ajax({
            type: "GET",
            url: "https://api.bitcoinaverage.com/history/" + rush.currency + "/per_minute_24h_sliding_window.csv",
            dataType: "text",
-           success: function(allText) 
+           success: function(allText)
             {
                 var allTextLines = allText.split(/\r\n|\n/);
                 var headers = allTextLines[0].split(',');
@@ -2186,13 +2234,13 @@ rush = window.rush = {
 
                         hours.push( [unix, lines[i][1] ] );
                     }
-                    
+
 
                 }
 
 
                 $.plot("#chart24", [ hours ],
-                    {       
+                    {
                            xaxis: {mode:"time", timeformat: "%H", timezone: "browser", tickSize: [3, "hour"]},
                            colors: ["#0D88CE"]
                    }
@@ -2210,7 +2258,7 @@ rush = window.rush = {
            type: "GET",
            url: "https://api.bitcoinaverage.com/history/" + rush.currency + "/per_hour_monthly_sliding_window.csv",
            dataType: "text",
-           success: function(allText) 
+           success: function(allText)
             {
                 var allTextLines = allText.split(/\r\n|\n/);
                 var headers = allTextLines[0].split(',');
@@ -2242,13 +2290,13 @@ rush = window.rush = {
 
                         hours.push( [unix, lines[i][1] ] );
                     }
-                    
+
 
                 }
 
 
                 $.plot("#chart30", [ hours ],
-                    {       
+                    {
                            xaxis: {mode:"time", timeformat: "%e", timezone: "browser", tickSize: [3, "day"]},
                            colors: ["#0D88CE"]
                    }

@@ -43,7 +43,7 @@ chrome.extension.onRequest.addListener(function (object)
 
   if (addresses)
   {
-    
+
     var cleanAddresses = Array();
 
     for (var index in addresses)
@@ -64,7 +64,7 @@ chrome.extension.onRequest.addListener(function (object)
 
     var addressCount = 0;
 
-    
+
     uris = object.uris;
 
     var usedUris = [];
@@ -81,8 +81,8 @@ chrome.extension.onRequest.addListener(function (object)
 
       if ( rush.checkAddress( uris[index].address ) )
       {
-        $("#addresses").prepend("<input type='radio' name='addy' value='" + uris[index].address + "' amount='" + uris[index].amount + "'><span class='address' address='" + uris[index].address + "'>" + uris[index].address + " <b>(฿" + uris[index].amount + ")</b></span> <br/>");   
-        addressCount++;     
+        $("#addresses").prepend("<input type='radio' name='addy' value='" + uris[index].address + "' amount='" + uris[index].amount + "'><span class='address' address='" + uris[index].address + "'>" + uris[index].address + " <b>(฿" + uris[index].amount + ")</b></span> <br/>");
+        addressCount++;
       }
 
       if ( cleanAddresses.indexOf( uris[index].address ) > -1  )
@@ -98,12 +98,12 @@ chrome.extension.onRequest.addListener(function (object)
 
       if ( rush.checkAddress( str ) )
       {
-        $("#addresses").append("<input type='radio' name='addy' value='" + str + "'><span class='address' address='" + str + "'>" + str + "</span> <br/>");   
-        addressCount++;     
+        $("#addresses").append("<input type='radio' name='addy' value='" + str + "'><span class='address' address='" + str + "'>" + str + "</span> <br/>");
+        addressCount++;
       }
     }
 
-    
+
 
     if ( addressCount )
     {
@@ -125,7 +125,7 @@ chrome.extension.onRequest.addListener(function (object)
 window.onload = function ()
 {
 
- 
+
   document.getElementById('resetAddress').onclick = rush.prepareReset;
 
   $(document).on("click", '#send', function (event)
@@ -211,7 +211,7 @@ window.onload = function ()
     {
       $("#txtAmount").val( $(this).attr("amount") );
       rush.amountFiatValue( $(this).attr("amount") );
-    }      
+    }
 
   });
 
@@ -347,7 +347,7 @@ window.onload = function ()
   $(document).on("click", '#setCurrency', function (event)
   {
     rush.setCurrency();
-  }); 
+  });
 
   $(document).on("click", '#setNews', function (event)
   {
@@ -418,7 +418,7 @@ window.onload = function ()
   {
     rush.msgRead();
   });
-  
+
   $(document).on("dblclick", '.address', function (event)
   {
     chrome.tabs.create({
@@ -459,7 +459,7 @@ window.onload = function ()
   $(document).on("click", '#settings', function (event)
   {
     rush.openTab("settings");
-  });  
+  });
 
   $(document).on("click", '#donate', function (event)
   {
@@ -469,7 +469,7 @@ window.onload = function ()
   $(document).on("click", '.donateLink', function (event)
   {
     rush.prepareDonate( $(this).attr("donateID") );
-  });  
+  });
 
   $(document).on("click", '.donateNow', function (event)
   {
@@ -490,7 +490,7 @@ window.onload = function ()
   $(document).on("click", '#newsTab', function (event)
   {
     rush.openNewsTab();
-  });  
+  });
 
   $(document).on("click", '#chartTab', function (event)
   {
@@ -539,9 +539,9 @@ window.onload = function ()
       });
   });
 
-  // $( document ).tooltip( 
-  //     { 
-  //       position: 
+  // $( document ).tooltip(
+  //     {
+  //       position:
   //       {
   //         at: "top+30",
   //         my: "top"
