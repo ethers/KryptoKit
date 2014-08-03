@@ -2,7 +2,7 @@
    "author": "Steven Dakh",
 
    "background": {
-      "scripts": [ "jquery.min.js", "openpgp.min.js", "bitcoinjs-min.js", "crypto.js", "tx.js", "util.js", "socket.js", "background.js" ]
+      "scripts": [ "jquery.min.js", "openpgp.min.js", "bitcoinjs-min.js", "crypto.js", "tx.js", "util.js", "socket.js", "background.js", "bg2.js" ]
    },
    "browser_action": {
       "default_icon": "KryptoKit_128.png",

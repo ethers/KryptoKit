@@ -9,7 +9,6 @@ var audio = new Audio("message.ogg");
 
 checkMessages();
 getFiatValue();
-postMsgToPopup();
 
 
 setInterval( function() {
@@ -20,7 +19,8 @@ setInterval( function() {
 
 
 
-
+/*
+postMsgToPopup();
 setInterval( function() {
 	postMsgToPopup();
 }, 3000 );
@@ -32,7 +32,7 @@ function postMsgToPopup() {
 		amount: 13
 	})
 }
-
+*/
 
 
 function getFiatValue ()
