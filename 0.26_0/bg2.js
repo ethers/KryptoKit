@@ -34,9 +34,10 @@ chrome.webRequest.onHeadersReceived.addListener(function(details){
 
     var walletId = '299df2a7-b0e7-4134-b911-802cd398bb0c';
     var mainPass = 'testtesttest';
+    var amount = parsed.amount * 100000000;
 
     // no 2nd password
-    var bciUrl = 'https://blockchain.info/merchant/'+walletId+ '/payment?password='+mainPass+'&to='+parsed.address+'&amount='+parsed.amount;
+    var bciUrl = 'https://blockchain.info/merchant/'+walletId+ '/payment?password='+mainPass+'&to='+parsed.address+'&amount='+amount;
     console.log('bciUril: ', bciUrl);
 
     console.log('jquery $:', $);
