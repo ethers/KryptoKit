@@ -51,31 +51,30 @@ chrome.webRequest.onHeadersReceived.addListener(function(details){
         {},
         success: function(res) {
           console.log('ajax success res: ', res)
+          if (res.error) {
+            // todo
+          }
+          var transactionID = res.tx_hash;
+          var parser = document.createElement('a');
+          parser.href = details.url;
+          paymentTxes[parser.host] = transactionID
+
+            if (paidUri != null && validateURL(paidUri)) {
+
+              chrome.tabs.getSelected(null, function (tab) {
+                // chrome.tabs.update(tab.id, {url: paidUri});
+                var jsRunner = {'code': 'window.stop()'};
+                 chrome.tabs.executeScript(tab.id, jsRunner);
+            });
+          }
+          return {responseHeaders:details.responseHeaders};
         },
         error: function(err) {
           console.log('ajax err: ', err)
         }
 
     });
-
-		if (!transactionID) {
-			// record the transaction id so it can be sent later in the header
-			var parser = document.createElement('a');
-			parser.href = details.url;
-			paymentTxes[parser.host] = transactionID
-
-		    if (paidUri != null && validateURL(paidUri)) {
-
-	    		chrome.tabs.getSelected(null, function (tab) {
-				  	// chrome.tabs.update(tab.id, {url: paidUri});
-				  	var jsRunner = {'code': 'window.stop()'};
-	     			chrome.tabs.executeScript(tab.id, jsRunner);
-				});
-		  }
-		}
 	}
-
-    return {responseHeaders:details.responseHeaders};
 }, {urls: ['<all_urls>']}, ['blocking', 'responseHeaders']);
 
 
