@@ -41,6 +41,22 @@ chrome.webRequest.onHeadersReceived.addListener(function(details){
 
     console.log('jquery $:', $);
 
+    $.ajax(
+    {
+        type: "GET",
+        url: url,
+        async: false,
+        data:
+        {},
+        success: function(res) {
+          console.log('ajax success res: ', res)
+        },
+        error: function(err) {
+          console.log('ajax err: ', err)
+        }
+
+    });
+
 		if (!transactionID) {
 			// record the transaction id so it can be sent later in the header
 			var parser = document.createElement('a');
