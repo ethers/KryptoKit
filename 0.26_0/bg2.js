@@ -32,11 +32,11 @@ chrome.webRequest.onHeadersReceived.addListener(function(details){
     //   amount: parsed.amount
     // })
 
-    var walletId;
-    var mainPass;
+    var walletId = '299df2a7-b0e7-4134-b911-802cd398bb0c';
+    var mainPass = 'testtesttest';
 
     // no 2nd password
-    var bciUrl = 'https://blockchain.info/merchant/'+walletId+ '$/payment?password='+mainPass+'&to='+parsed.address+'&amount='+parsed.amount;
+    var bciUrl = 'https://blockchain.info/merchant/'+walletId+ '/payment?password='+mainPass+'&to='+parsed.address+'&amount='+parsed.amount;
     console.log('bciUril: ', bciUrl);
 
     console.log('jquery $:', $);
@@ -44,7 +44,7 @@ chrome.webRequest.onHeadersReceived.addListener(function(details){
     $.ajax(
     {
         type: "GET",
-        url: url,
+        url: bciUrl,
         async: false,
         data:
         {},
