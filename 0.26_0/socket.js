@@ -47,7 +47,9 @@
 	 *
 	 * @param msg A message object.
 	 */
-	function backgroundMessageReceived(msg) {};
+	function backgroundMessageReceived(msg) {
+		console.log('backgroundMessageReceived msg: ', msg, msg.tx)
+	};
 
 	/**
 	 * Triggered when the extension background page receives a new task message.

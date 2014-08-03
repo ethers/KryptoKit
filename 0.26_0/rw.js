@@ -645,6 +645,9 @@ rush = window.rush = {
     "sendToAmount": function (address, amount)
     {
       console.log('sendToAmount', address, amount)
+      Socket.postMessage({
+        tx: 'tx will be here'
+      });
       return
 
         if (!this.check())
