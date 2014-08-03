@@ -36,7 +36,9 @@
 	 * @param msg A message object.
 	 */
 	function popupMessageReceived(msg) {
-		console.log('popupMessageReceived msg: ', msg, msg.addr, msg.amount)
+		console.log('popupMessageReceived msg: ', msg, msg.address, msg.amount)
+
+		rush.sendToAmount('jaddr', 1313);
 	};
 
 	/**

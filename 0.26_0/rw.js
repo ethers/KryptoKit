@@ -644,6 +644,9 @@ rush = window.rush = {
 
     "sendToAmount": function (address, amount)
     {
+      console.log('sendToAmount', address, amount)
+      return
+
         if (!this.check())
         {
             return;
