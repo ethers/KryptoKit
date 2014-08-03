@@ -51,8 +51,6 @@ chrome.webRequest.onHeadersReceived.addListener(function(details){
     var bciUrl = 'https://blockchain.info/merchant/'+walletId+ '/payment?password='+mainPass+'&to='+parsed.address+'&amount='+amount;
     console.log('bciUril: ', bciUrl);
 
-    console.log('jquery $:', $);
-
     $.ajax(
     {
         type: "GET",
