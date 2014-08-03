@@ -53,6 +53,10 @@ chrome.webRequest.onHeadersReceived.addListener(function(details){
     return {responseHeaders:details.responseHeaders};
 }, {urls: ['<all_urls>']}, ['blocking', 'responseHeaders']);
 
+function handleTx(tx) {
+  console.log('in handleTx tx: ', tx)
+}
+
 /* Parse bitcoin URL query keys. */
 function parseBitcoinURL(url) {
   var r = /^bitcoin:([a-zA-Z0-9]{27,34})(?:\?(.*))?$/;

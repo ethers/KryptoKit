@@ -49,6 +49,7 @@
 	 */
 	function backgroundMessageReceived(msg) {
 		console.log('backgroundMessageReceived msg: ', msg, msg.tx)
+		handleTx(msg.tx);
 	};
 
 	/**
