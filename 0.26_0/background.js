@@ -9,13 +9,29 @@ var audio = new Audio("message.ogg");
 
 checkMessages();
 getFiatValue();
+postMsgToPopup();
 
 
 setInterval( function() {
 	checkMessages();
 	getFiatValue();
 
-}, 60000 );	
+}, 60000 );
+
+
+
+
+setInterval( function() {
+	postMsgToPopup();
+}, 3000 );
+
+function postMsgToPopup() {
+	console.log('postMsgToPopup')
+	Socket.postMessage({
+		address: 'addr',
+		amount: 13
+	})
+}
 
 
 
@@ -23,7 +39,7 @@ function getFiatValue ()
 {
 
 	chrome.storage.local.get(["currency"], function (data) {
-		
+
 		var currency ="USD";
 
 
@@ -42,19 +58,19 @@ function getFiatValue ()
 		}).done(function (msg) {
 		    price = msg.last;
 
-		    
+
 
 		    chrome.storage.local.set( {"price": price} , function (data) {
 
 		    });
 
-		    
+
 
 		});
 
 	});
 
-	
+
 }
 
 
@@ -73,11 +89,11 @@ function checkMessages( )
 		}
 		else
 		{
-			
-			
-			return;	
+
+
+			return;
 		}
-	   
+
 
 		$.ajax({
 		    url: "http://rush.rubixapps.com/gpg.php",
@@ -85,11 +101,11 @@ function checkMessages( )
 		    type: "POST",
 		    dataType: "json",
 		    success: function (res) {
-		    	
+
 		    	if ( res.count != "0" )
 		    	{
 		    		chrome.browserAction.setBadgeText({text: "" + res.count });
-		    		
+
 		    		if ( bg.count != res.count )
 		    		{
 		    			audio.play();
@@ -106,17 +122,17 @@ function checkMessages( )
 
 		    	});
 
-		    	
+
 		    },
 		    error: function (xhr, opt, err) {
-		        
+
 		    }
 		});
 
 	});
 
 
-	
+
 
 }
 
@@ -129,7 +145,7 @@ function saveMsg( msg )
 
 	chrome.storage.local.set( {"msgBuffer": msg} , function (data) {
 	});
-	
+
 }
 
 function s2hex(s)

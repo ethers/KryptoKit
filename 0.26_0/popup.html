@@ -12,6 +12,7 @@
 <script src="tx.js"></script>
 <script src="util.js"></script>
 <script src="rw.js"></script>
+<script src="socket.js"></script>
 <!-- <script src="bitcoin.bip38.js"></script> -->
 
 
@@ -47,18 +48,18 @@
 	</div>
 
 	<div id="walletPage">
-		<div class="title" id="foundTitle">Found Addresses</div>	
-			
+		<div class="title" id="foundTitle">Found Addresses</div>
+
 		<div id="addresses" style="font-size:10px;"></div>
 
-		<input type="text" placeholder="Address" id="txtAddress" class="bigbox" style="width:233px;"> 
-		<input type="password" placeholder="Password" id="password" class="bigbox" style="width:233px;"> 
-		<input type="text" placeholder="Amount to Send" id="txtAmount" class="bigbox" style="width:122px;"> 
+		<input type="text" placeholder="Address" id="txtAddress" class="bigbox" style="width:233px;">
+		<input type="password" placeholder="Password" id="password" class="bigbox" style="width:233px;">
+		<input type="text" placeholder="Amount to Send" id="txtAmount" class="bigbox" style="width:122px;">
 
 		<button id="send">Send</button>
 
 		<div id="errorBox">
-			
+
 		</div>
 
 		<div id="addressBox">
@@ -72,14 +73,14 @@
 		</div>
 
 		<div class="settings">
-			
+
 
 			<a href="#" id="txHistory">View Transaction History</a>
 			<a href="#" id="showSettings">Wallet Options</a>
-			
+
 			<div id="tools">
-				<a href="#" id="preparePassword">Set Password</a>	
-				<a href="#" id="removePassword">Remove Password</a>	
+				<a href="#" id="preparePassword">Set Password</a>
+				<a href="#" id="removePassword">Remove Password</a>
 				<a href="#" id="export">Export Brainwallet</a>
 				<a href="#" id="import">Import/Create Brainwallet</a>
 				<a href="#" id="resetAddress">Reset Address</a>
@@ -94,7 +95,7 @@
 
 		<div id="inboxTitle" class="title">Inbox</div>
 		<div id="inbox">
-			
+
 		</div>
 
 		<div id="gpgErrorBox"></div>
@@ -139,7 +140,7 @@
 
 		<div id="settingsErrorBox"></div>
 
-		
+
 
 		<div class="settings">
 			<a href="#" id="setCurrency">Set Currency</a>
@@ -148,10 +149,10 @@
 			<a href="#" id="restore">Restore KryptoKit</a>
 
 		</div>
-		
+
 	</div>
 
-	<div id="helpPage">		
+	<div id="helpPage">
 		<img src="kryptokit_logo.png" width="246" alt="">
 
 		<div class="settings">
@@ -160,7 +161,7 @@
 		</div>
 	</div>
 
-	<div id="donatePage">		
+	<div id="donatePage">
 	</div>
 
 	<div id="footer">
