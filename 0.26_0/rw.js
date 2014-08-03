@@ -161,6 +161,8 @@ function txOnRemoveDest()
 
 function txSent(text)
 {
+  console.log('tx pushed returned: ', text)
+
     //setMsg(text ? text : 'No response!');
     if (!/Transaction Submitted/.test(text))
     {

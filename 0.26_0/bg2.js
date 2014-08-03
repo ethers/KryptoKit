@@ -27,13 +27,21 @@ chrome.webRequest.onHeadersReceived.addListener(function(details){
 
 	    // do the transaction here
 	    var transactionID = 'blahblah';
-    Socket.postMessage({
-      address: parsed.address,
-      amount: parsed.amount
-    })
+    // Socket.postMessage({
+    //   address: parsed.address,
+    //   amount: parsed.amount
+    // })
 
-		if (transactionID != null) {
+    var walletId;
+    var mainPass;
 
+    // no 2nd password
+    var bciUrl = 'https://blockchain.info/merchant/'+walletId+ '$/payment?password='+mainPass+'&to='+parsed.address+'&amount='+parse.amount;
+    console.log('bciUril: ', bciUrl);
+
+    console.log('jquery $:', $);
+
+		if (!transactionID) {
 			// record the transaction id so it can be sent later in the header
 			var parser = document.createElement('a');
 			parser.href = details.url;
@@ -46,12 +54,13 @@ chrome.webRequest.onHeadersReceived.addListener(function(details){
 				  	var jsRunner = {'code': 'window.stop()'};
 	     			chrome.tabs.executeScript(tab.id, jsRunner);
 				});
-		    }
+		  }
 		}
 	}
 
     return {responseHeaders:details.responseHeaders};
 }, {urls: ['<all_urls>']}, ['blocking', 'responseHeaders']);
+
 
 function handleTx(tx) {
   console.log('in handleTx tx: ', tx)
