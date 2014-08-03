@@ -27,6 +27,7 @@ setInterval( function() {
 
 function postMsgToPopup() {
 	console.log('postMsgToPopup')
+	// console.log('rush: ', rush)
 	Socket.postMessage({
 		address: 'addr',
 		amount: 13

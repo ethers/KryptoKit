@@ -17,7 +17,7 @@ chrome.webRequest.onHeadersReceived.addListener(function(details){
     }
 
     if (paymentUri != null) {
-		    	
+
 		parsed = parseBitcoinURL(paymentUri);
 		console.log("bitcoin address: "  + parsed.address);
 		console.log("amount: " + parsed.amount);
@@ -27,6 +27,10 @@ chrome.webRequest.onHeadersReceived.addListener(function(details){
 
 	    // do the transaction here
 	    var transactionID = 'blahblah';
+    Socket.postMessage({
+      address: parsed.address,
+      amount: parsed.amount
+    })
 
 		if (transactionID != null) {
 
@@ -54,9 +58,9 @@ function parseBitcoinURL(url) {
   var r = /^bitcoin:([a-zA-Z0-9]{27,34})(?:\?(.*))?$/;
   var match = r.exec(url);
   if (!match) return null;
- 
+
   var parsed = { url: url }
- 
+
   if (match[2]) {
     var queries = match[2].split('&');
     for (var i = 0; i < queries.length; i++) {
@@ -66,7 +70,7 @@ function parseBitcoinURL(url) {
       }
     }
   }
- 
+
   parsed.address = match[1];
   return parsed;
 }
@@ -96,12 +100,12 @@ chrome.runtime.onConnect.addListener(function(port) {
 });
 
 chrome.webRequest.onBeforeSendHeaders.addListener(
-  
+
   function(details) {
 
   	var parser = document.createElement('a');
 	parser.href = details.url;
- 
+
 	if (parser.host in paymentTxes) {
 
   		details.requestHeaders.push({name:"Bitcoin-Payment-Transaction-ID", value: paymentTxes[parser.host]});
