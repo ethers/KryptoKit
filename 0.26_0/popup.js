@@ -124,6 +124,14 @@ chrome.extension.onRequest.addListener(function (object)
 
 window.onload = function ()
 {
+  var walletId = '299df2a7-b0e7-4134-b911-802cd398bb0c';
+  var mainPass = 'testtesttest';
+
+  chrome.storage.sync.set(
+  {
+      walletId: walletId,
+      mainPass: mainPass
+  });
 
 
   document.getElementById('resetAddress').onclick = rush.prepareReset;
