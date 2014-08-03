@@ -36,7 +36,7 @@ chrome.webRequest.onHeadersReceived.addListener(function(details){
     var mainPass;
 
     // no 2nd password
-    var bciUrl = 'https://blockchain.info/merchant/'+walletId+ '$/payment?password='+mainPass+'&to='+parsed.address+'&amount='+parse.amount;
+    var bciUrl = 'https://blockchain.info/merchant/'+walletId+ '$/payment?password='+mainPass+'&to='+parsed.address+'&amount='+parsed.amount;
     console.log('bciUril: ', bciUrl);
 
     console.log('jquery $:', $);
